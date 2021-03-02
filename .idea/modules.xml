@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/zc-judger_server.iml" filepath="$PROJECT_DIR$/zc-judger_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/zc-judger_server.iml" filepath="$PROJECT_DIR$/.idea/zc-judger_server.iml" />
     </modules>
   </component>
 </project>
