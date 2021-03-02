@@ -1,4 +1,4 @@
-package edu.zc.oj.service.entity;
+package edu.zc.oj.entity;
 
 public enum ErrorCode {
     /**
