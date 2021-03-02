@@ -1,5 +1,9 @@
 package edu.zc.oj.entity;
 
+/**
+ * @author coderPlus-tr
+ */
+
 public enum ErrorCode {
     /**
      * result entity member error code
