@@ -41,7 +41,7 @@ public class JudgerServerServiceImpl implements JudgerServerService {
         T object = null;
         try {
             object = objectMapper.readValue(json, clazz);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return object;
@@ -51,11 +51,10 @@ public class JudgerServerServiceImpl implements JudgerServerService {
     public Result run(Config config) {
         Process process;
         Result result = null;
-        String cmd = "libjudger.so" + config;
-
+        String cmd = "libjudger.so " + config;
         try {
-            process = Runtime.getRuntime().exec(cmd);
-
+                process = Runtime.getRuntime().exec(cmd);
+                System.out.println(process.waitFor());
                 InputStreamReader ir = new InputStreamReader(process.getInputStream());
                 LineNumberReader input = new LineNumberReader(ir);
                 String line;
@@ -67,7 +66,7 @@ public class JudgerServerServiceImpl implements JudgerServerService {
                 ir.close();
                 result = transObject(resultJson.toString(), Result.class);
 
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

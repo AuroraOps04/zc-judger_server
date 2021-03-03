@@ -3,7 +3,6 @@ package edu.zc.oj.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * @author keep-looking
@@ -40,8 +39,8 @@ public class Config {
     public String toString(){
         return " --max_cpu_time=" + cpuTime + " --max_real_time=" + realTime + " --max_memory=" + memory + " --max_stack="
                 + stack + " --max_process_number=" + processNumber + " --max_output_size=" + outputSize + " --memory_limit_check_only="
-                + memoryLimitCheckOnly + " --exe_path=" + exePath + " --input_file=" + inputFile + " --output_file=" + outputFile
-                + " --error_file=" + errorFile + " --args=" + args + " --env=" + env + " --log_path=" + logPath + " --seccomp_rule_name="
+                + memoryLimitCheckOnly + " --exe_path=" + exePath + " --input_path=" + inputFile + " --output_path=" + outputFile
+                + " --error_path=" + errorFile + " --args=" + args + " --env=" + env + " --log_path=" + logPath + " --seccomp_rule_name="
                 + seccompRuleName + " --uid=" + uid + " --gid=" + gid;
     }
 }

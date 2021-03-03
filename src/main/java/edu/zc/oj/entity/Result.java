@@ -1,6 +1,8 @@
 package edu.zc.oj.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +21,13 @@ public class Result {
     /*
     * Result entity members
     */
+    @JsonProperty("cpu_time")
     private Integer cpuTime;
+    @JsonProperty("real_time")
     private Integer realTime;
     private Integer memory;
     private Integer signal;
+    @JsonProperty("exit_code")
     private Integer exitCode;
     private ErrorCode error;
     private ResultCode result;
