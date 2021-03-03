@@ -50,14 +50,12 @@ public class JudgerServerServiceImpl implements JudgerServerService {
     @Override
     public Result run(Config config) {
         Process process;
-        int exitCode;
         Result result = null;
         String cmd = "libjudger.so" + config;
 
         try {
             process = Runtime.getRuntime().exec(cmd);
-            exitCode = process.waitFor();
-            if (exitCode == 0) {
+
                 InputStreamReader ir = new InputStreamReader(process.getInputStream());
                 LineNumberReader input = new LineNumberReader(ir);
                 String line;
@@ -68,9 +66,8 @@ public class JudgerServerServiceImpl implements JudgerServerService {
                 input.close();
                 ir.close();
                 result = transObject(resultJson.toString(), Result.class);
-            }
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
