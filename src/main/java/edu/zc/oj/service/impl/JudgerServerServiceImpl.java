@@ -5,13 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
 import edu.zc.oj.service.JudgerServerService;
-import org.jcp.xml.dsig.internal.dom.DOMUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-
-import static edu.zc.oj.entity.ErrorCode.INVALID_CONFIG;
 
 
 public class JudgerServerServiceImpl implements JudgerServerService {
@@ -35,8 +32,8 @@ public class JudgerServerServiceImpl implements JudgerServerService {
     /**
      * Deserialization
      *
-     * @param json
-     * @param clazz
+     * @param json string waiting to be deserialized
+     * @param clazz return value type class
      * @return T Result or Config
      */
     private static <T> T transObject(String json, Class<T> clazz) {
@@ -52,7 +49,7 @@ public class JudgerServerServiceImpl implements JudgerServerService {
 
     @Override
     public Result run(Config config) {
-        Process process = null;
+        Process process;
         int exitCode;
         Result result = null;
         String cmd = "libjudger.so" + config;
@@ -64,13 +61,13 @@ public class JudgerServerServiceImpl implements JudgerServerService {
                 InputStreamReader ir = new InputStreamReader(process.getInputStream());
                 LineNumberReader input = new LineNumberReader(ir);
                 String line;
-                String resultJson = "";
+                StringBuilder resultJson = new StringBuilder();
                 while ((line = input.readLine()) != null) {
-                    resultJson += line;
+                    resultJson.append(line);
                 }
                 input.close();
                 ir.close();
-                result = transObject(resultJson, Result.class);
+                result = transObject(resultJson.toString(), Result.class);
             }
 
         } catch (IOException | InterruptedException e) {
