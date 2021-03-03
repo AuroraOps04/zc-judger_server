@@ -2,6 +2,8 @@ package edu.zc.oj.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.zc.oj.entity.Config;
+import edu.zc.oj.entity.Result;
 import edu.zc.oj.service.JudgerServerService;
 
 
@@ -31,4 +33,8 @@ public class JudgerServerServiceImpl implements JudgerServerService {
         return object;
     }
 
+    @Override
+    public Result run(Config config) {
+        return null;
+    }
 }
