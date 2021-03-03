@@ -24,7 +24,7 @@ public class Result {
     private Integer memory;
     private Integer signal;
     private Integer exitCode;
-    private ErrorCode result;
-    private ResultCode error;
+    private ErrorCode error;
+    private ResultCode result;
 
 }

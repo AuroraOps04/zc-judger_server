@@ -5,11 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
 import edu.zc.oj.service.JudgerServerService;
+import org.jcp.xml.dsig.internal.dom.DOMUtils;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+
+import static edu.zc.oj.entity.ErrorCode.INVALID_CONFIG;
 
 
 public class JudgerServerServiceImpl implements JudgerServerService {
-
-//    序列化
+    /**
+     * Serialization
+     * @param object Result or Config
+     * @return json
+     */
     private static String transJson(Object object){
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
@@ -21,7 +31,12 @@ public class JudgerServerServiceImpl implements JudgerServerService {
         return json;
     }
 
-//反序列化
+    /**
+     * Deserialization
+     * @param json
+     * @param clazz
+     * @return T Result or Config
+     */
     private static <T> T transObject(String json, Class<T> clazz){
         ObjectMapper objectMapper = new ObjectMapper();
         T object = null;
@@ -35,6 +50,34 @@ public class JudgerServerServiceImpl implements JudgerServerService {
 
     @Override
     public Result run(Config config) {
-        return null;
+        String line = "";
+        Process process = null;
+        int exitValue;
+        Result result = null;
+        String cmd = "libjudger.so"+config.toString();
+//        序列化对象信息
+
+        try {
+            //判断是否执行成功
+            process = Runtime.getRuntime().exec(cmd);
+            exitValue = process.waitFor();
+            if(exitValue == 0){
+//                成功
+                InputStreamReader ir = new InputStreamReader(process.getInputStream());
+                LineNumberReader input = new LineNumberReader(ir);
+                while((line = input.readLine()) != null);
+                    System.out.println(line);
+                input.close();
+                ir.close();
+//                应答
+                result = transObject(line, Result.class);
+                System.out.println(result);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

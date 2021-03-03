@@ -11,7 +11,6 @@ import lombok.ToString;
  */
 
 @Data
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Config {
@@ -36,4 +35,12 @@ public class Config {
     private Integer uid;
     private Integer gid;
 
+    @Override
+    public String toString(){
+        return " --max_cpu_time=" + cpuTime + " --max_real_time=" + realTime + " --max_memory=" + memory + " --max_stack="
+                + stack + " --max_process_number=" + processNumber + " --max_output_size=" + outputSize + " --memory_limit_check_only="
+                + memoryLimitCheckOnly + " --exe_path=" + exePath + " --input_file=" + inputFile + " --output_file=" + outputFile
+                + " --error_file=" + errorFile + " --args=" + args + " --env=" + env + " --log_path=" + logPath + " --seccomp_rule_name="
+                + seccompRuleName + " --uid=" + uid + " --gid=" + gid;
+    }
 }
