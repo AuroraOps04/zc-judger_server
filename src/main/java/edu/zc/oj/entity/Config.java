@@ -17,6 +17,7 @@ public class Config {
     /*
      *   config entity members
      */
+
     private Integer cpuTime;
     private Integer realTime;
     private Integer memory;
@@ -28,8 +29,8 @@ public class Config {
     private String inputFile;
     private String outputFile;
     private String errorFile;
-    private String[] args;
-    private String[] env;
+    private String args;
+    private String env;
     private String logPath;
     private String seccompRuleName;
     private Integer uid;
