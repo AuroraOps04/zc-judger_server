@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
 import edu.zc.oj.service.JudgerServerService;
-import org.jcp.xml.dsig.internal.dom.DOMUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -65,8 +64,9 @@ public class JudgerServerServiceImpl implements JudgerServerService {
 //                成功
                 InputStreamReader ir = new InputStreamReader(process.getInputStream());
                 LineNumberReader input = new LineNumberReader(ir);
-                while((line = input.readLine()) != null);
+                while((line = input.readLine()) != null){
                     System.out.println(line);
+                }
                 input.close();
                 ir.close();
 //                应答
