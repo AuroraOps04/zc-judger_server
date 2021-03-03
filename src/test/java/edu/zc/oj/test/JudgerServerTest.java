@@ -6,9 +6,6 @@ import edu.zc.oj.service.JudgerServerService;
 import edu.zc.oj.service.impl.JudgerServerServiceImpl;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * @author coderplus-tr
@@ -32,10 +29,12 @@ public class JudgerServerTest {
         config.setEnv("foo=bar");
         config.setLogPath("judger.log");
         config.setSeccompRuleName("c_cpp");
+        config.setMemoryLimitCheckOnly(0);
         config.setUid(0);
         config.setGid(0);
         JudgerServerService judger = new JudgerServerServiceImpl();
         final Result result = judger.run(config);
         System.out.println(result);
+        System.out.println(result.getResult());
     }
 }

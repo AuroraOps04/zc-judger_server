@@ -1,5 +1,7 @@
 package edu.zc.oj.entity;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * @author coderPlus-tr
  */
@@ -28,5 +30,11 @@ public enum ErrorCode {
 
     public Integer getValue() {
         return value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString(){
+        return String.valueOf(value);
     }
 }
