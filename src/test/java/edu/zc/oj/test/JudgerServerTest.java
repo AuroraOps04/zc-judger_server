@@ -22,11 +22,11 @@ public class JudgerServerTest {
         config.setOutputSize(10000);
         config.setStack(32 * 1024 * 1024);
         config.setExePath("/bin/echo");
-        config.setInputFile("/dev/null");
-        config.setOutputFile("echo.out");
-        config.setErrorFile("echo.out");
-        config.setArgs("helloWorld");
-        config.setEnv("foo=bar");
+        config.setInputPath("/dev/null");
+        config.setOutputPath("echo.out");
+        config.setErrorPath("echo.out");
+        config.setArgs(new String[]{"helloworld"});
+        config.setEnv(new String[]{"foo=bar"});
         config.setLogPath("judger.log");
         config.setSeccompRuleName("c_cpp");
         config.setMemoryLimitCheckOnly(0);

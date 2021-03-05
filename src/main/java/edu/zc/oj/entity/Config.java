@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+
 /**
  * @author keep-looking
  * @time 2021/3/2 - 17:10
@@ -25,11 +27,11 @@ public class Config {
     private Integer outputSize;
     private Integer memoryLimitCheckOnly;
     private String exePath;
-    private String inputFile;
-    private String outputFile;
-    private String errorFile;
-    private String args;
-    private String env;
+    private String inputPath;
+    private String outputPath;
+    private String errorPath;
+    private String[] args;
+    private String[] env;
     private String logPath;
     private String seccompRuleName;
     private Integer uid;
@@ -37,10 +39,21 @@ public class Config {
 
     @Override
     public String toString(){
+
+        StringBuilder reArgs = new StringBuilder();
+        StringBuilder reEnv = new StringBuilder();
+        for (String arg : args) {
+            reArgs.append(" --args=").append(arg);
+        }
+        for (String en:env){
+            reEnv.append(" --env=").append(en);
+        }
+
         return " --max_cpu_time=" + cpuTime + " --max_real_time=" + realTime + " --max_memory=" + memory + " --max_stack="
                 + stack + " --max_process_number=" + processNumber + " --max_output_size=" + outputSize + " --memory_limit_check_only="
-                + memoryLimitCheckOnly + " --exe_path=" + exePath + " --input_path=" + inputFile + " --output_path=" + outputFile
-                + " --error_path=" + errorFile + " --args=" + args + " --env=" + env + " --log_path=" + logPath + " --seccomp_rule_name="
+                + memoryLimitCheckOnly + " --exe_path=" + exePath + " --input_path=" + inputPath + " --output_path=" + outputPath
+                + " --error_path=" + errorPath + reArgs + reEnv + " --log_path=" + logPath + " --seccomp_rule_name="
                 + seccompRuleName + " --uid=" + uid + " --gid=" + gid;
     }
+
 }
