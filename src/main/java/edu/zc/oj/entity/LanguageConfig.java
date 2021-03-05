@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author keep-looking
- * @time 2021/3/5 - 17:45
+ * @date 2021/3/5 - 17:45
  */
 
 @Data
@@ -21,10 +20,11 @@ public class LanguageConfig {
     /**
      * LanguageConfig entity members
      */
+
     private String src;
-    private Integer max_cpu_time;
-    private Integer max_memory;
+    private Integer maxCpuTime;
+    private Integer maxMemory;
     private Compile compile;
     private Run run;
-    private List<TestCases> testCases;
+    private List<TestCase> testCases;
 }

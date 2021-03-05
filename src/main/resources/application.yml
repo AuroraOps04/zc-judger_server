@@ -1,3 +1,16 @@
 spring:
   profiles:
-    active: pro
+    active: dev
+---
+spring:
+  profiles: pro
+server:
+  port: 80
+---
+spring:
+  profiles: dev
+server:
+  port: 8080
+logging:
+  level:
+    root: info

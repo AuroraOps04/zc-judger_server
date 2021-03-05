@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * @author keep-looking
- * @time 2021/3/5 - 17:47
+ * @date 2021/3/5 - 17:47
  */
 
 @Data
@@ -19,7 +19,7 @@ public class Run {
      * Run entity members
      */
     private String command;
-    private String seccomp_rule;
+    private String seccompRule;
     private String[] env;
 
 }

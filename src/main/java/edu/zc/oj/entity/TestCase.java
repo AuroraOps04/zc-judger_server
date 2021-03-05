@@ -7,17 +7,19 @@ import lombok.ToString;
 
 /**
  * @author keep-looking
- * @time 2021/3/5 - 18:21
+ * @date 2021/3/5 - 18:21
  */
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class TestCases {
+public class TestCase {
     /**
-     * TestCases entity members
+     * TestCase entity members
      */
+
     private String in;
     private String out;
+    private Integer id;
 }

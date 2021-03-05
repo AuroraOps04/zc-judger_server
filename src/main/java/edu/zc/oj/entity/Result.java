@@ -10,7 +10,7 @@ import lombok.ToString;
 
 /**
  * @author keep-looking
- * @time 2021/3/2 - 17:40
+ * @date 2021/3/2 - 17:40
  */
 
 @Data
@@ -21,6 +21,7 @@ public class Result {
     /*
     * Result entity members
     */
+
     @JsonProperty("cpu_time")
     private Integer cpuTime;
     @JsonProperty("real_time")
@@ -31,5 +32,4 @@ public class Result {
     private Integer exitCode;
     private ErrorCode error;
     private ResultCode result;
-
 }

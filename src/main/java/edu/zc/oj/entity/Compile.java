@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * @author keep-looking
- * @time 2021/3/5 - 17:46
+ * @date 2021/3/5 - 17:46
  */
 
 @Data
@@ -18,10 +18,11 @@ public class Compile {
     /**
      * Compile entity members
      */
-    private String src_name;
-    private String exe_name;
-    private Integer max_cpu_time;
-    private Integer max_real_time;
-    private Integer max_memory;
-    private String compile_command;
+
+    private String srcName;
+    private String exeName;
+    private Integer maxCpuTime;
+    private Integer maxRealTime;
+    private Integer maxMemory;
+    private String compileCommand;
 }

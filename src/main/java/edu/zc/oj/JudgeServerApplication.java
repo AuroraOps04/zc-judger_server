@@ -14,8 +14,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
         DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class})
-public class JudgerServerApplication {
+public class JudgeServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(JudgerServerApplication.class, args);
+        SpringApplication.run(JudgeServerApplication.class, args);
     }
 }

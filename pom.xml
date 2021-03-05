@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.zc.oj</groupId>
-    <artifactId>zc-judger_server</artifactId>
+    <artifactId>zc-judge_server</artifactId>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
