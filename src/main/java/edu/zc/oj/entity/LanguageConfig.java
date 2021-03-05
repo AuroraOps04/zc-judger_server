@@ -22,8 +22,8 @@ public class LanguageConfig {
      * LanguageConfig entity members
      */
     private String src;
-    private Integer max_cpu_time;
-    private Integer max_memory;
+    private Integer maxCpuTime;
+    private Integer maxMemory;
     private Compile compile;
     private Run run;
     private List<TestCases> testCases;

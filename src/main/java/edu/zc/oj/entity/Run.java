@@ -19,7 +19,7 @@ public class Run {
      * Run entity members
      */
     private String command;
-    private String seccomp_rule;
+    private String seccompRule;
     private String[] env;
 
 }
