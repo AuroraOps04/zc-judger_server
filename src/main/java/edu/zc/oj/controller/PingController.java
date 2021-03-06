@@ -1,6 +1,6 @@
 package edu.zc.oj.controller;
 
-import edu.zc.oj.entity.Ping;
+import edu.zc.oj.entity.request.Ping;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 
