@@ -1,6 +1,15 @@
 spring:
   profiles:
     active: dev
+judge:
+  judge-workspace-base: /judge/run
+  compile-log-path: /log/compile.log
+  judge-run-log-path: /log/judger.log
+  judge-user: code
+  judge-group: code
+  judge-user-id: 10020
+  judge-group-id: 10020
+
 ---
 spring:
   profiles: pro

@@ -1,15 +1,18 @@
-package edu.zc.oj.service;
+package edu.zc.oj.judge;
 
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
 
+import java.util.concurrent.Future;
+
 /**
  * @author coderPlus-tr
  */
-public interface JudgeClientService {
+public interface JudgeClient {
 
     /**
      * judge code
+     *
      * @param config edu.zc.oj.entity.Config
      * @return edu.zc.oj.entity.Result
      */

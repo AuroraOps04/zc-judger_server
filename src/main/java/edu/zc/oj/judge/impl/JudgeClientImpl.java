@@ -1,25 +1,27 @@
-package edu.zc.oj.service.impl;
+package edu.zc.oj.judge.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
-import edu.zc.oj.service.JudgeClientService;
+import edu.zc.oj.judge.JudgeClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.util.concurrent.Future;
 
 /**
  * @author coderPlus-tr
  */
 @Slf4j
-@Service
+@Component
 @RequiredArgsConstructor
-public class JudgeClientServiceImpl implements JudgeClientService {
+public class JudgeClientImpl implements JudgeClient {
     private ObjectMapper objectMapper;
     @Override
     public Result run(Config config) {

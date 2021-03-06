@@ -1,4 +1,4 @@
-package edu.zc.oj.entity;
+package edu.zc.oj.entity.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,7 +27,7 @@ public class JudgeParameter {
     @ApiModelProperty("使用的编程语言对应的一些配置")
     private LanguageConfig languageConfig;
     @ApiModelProperty("测试用例")
-    private List<TestCase> testCase;
+    private List<TestCase> testCases;
     @ApiModelProperty("源代码")
     private String src;
     @ApiModelProperty("cpu运行最大时间")

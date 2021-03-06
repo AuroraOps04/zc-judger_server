@@ -1,4 +1,4 @@
-package edu.zc.oj.entity;
+package edu.zc.oj.entity.request;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;

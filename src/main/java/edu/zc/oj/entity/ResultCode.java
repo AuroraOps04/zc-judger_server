@@ -12,7 +12,8 @@ public enum ResultCode {
     REAL_TIME_LIMIT_EXCEEDED(2),
     MEMORY_LIMIT_EXCEEDED(3),
     RUNTIME_ERROR(4),
-    SYSTEM_ERROR(5);
+    SYSTEM_ERROR(5),
+    WRONG_ANSWER(6);
     private final Integer value;
 
     ResultCode(Integer value) {
@@ -27,4 +28,5 @@ public enum ResultCode {
     public String toString(){
         return String.valueOf(value);
     }
+
 }
