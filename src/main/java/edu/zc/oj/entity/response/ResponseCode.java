@@ -12,8 +12,9 @@ public enum ResponseCode {
      */
 
     SUCCESS(200, "ok"),
-    SERVER_ERROR(500, "server error"),
-    PARAMS_ERROR(100, "params error")
+    PARAMS_ERROR(100, "params error"),
+    NOT_FOUND(404, "not found"),
+    SERVER_ERROR(500, "server error")
     ;
     private final Integer code;
     private final String message;
