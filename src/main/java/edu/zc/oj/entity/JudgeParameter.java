@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -30,7 +31,9 @@ public class JudgeParameter {
     @ApiModelProperty("源代码")
     private String src;
     @ApiModelProperty("cpu运行最大时间")
+    @NotNull(message = "cpu运行最大时间不能为空")
     private Integer maxCpuTime;
     @ApiModelProperty("进程虚拟内存的最大大小")
+    @NotNull(message = "虚拟内存大小不能为空")
     private Integer maxMemory;
 }
