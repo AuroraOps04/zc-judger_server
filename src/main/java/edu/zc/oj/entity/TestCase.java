@@ -1,5 +1,6 @@
 package edu.zc.oj.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ApiModel("测试用例")
 public class TestCase {
     /**
      * TestCase entity members

@@ -18,10 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@ApiModel("使用的编程语言对应的一些配置")
 public class LanguageConfig {
     /**
      * LanguageConfig entity members
      */
+    @ApiModelProperty("运行配置")
     private Run run;
+    @ApiModelProperty("编译配置")
     private Compile compile;
 }
