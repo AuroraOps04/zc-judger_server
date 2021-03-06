@@ -2,8 +2,8 @@ package edu.zc.oj.test;
 
 import edu.zc.oj.entity.Config;
 import edu.zc.oj.entity.Result;
-import edu.zc.oj.service.JudgeClientService;
-import edu.zc.oj.service.impl.JudgeClientServiceImpl;
+import edu.zc.oj.judge.JudgeClient;
+import edu.zc.oj.judge.impl.JudgeClientImpl;
 import org.junit.Test;
 
 
@@ -32,9 +32,5 @@ public class JudgerServerTest {
         config.setMemoryLimitCheckOnly(0);
         config.setUid(0);
         config.setGid(0);
-        JudgeClientService judger = new JudgeClientServiceImpl();
-        final Result result = judger.run(config);
-        System.out.println(result);
-        System.out.println(result.getResult());
     }
 }

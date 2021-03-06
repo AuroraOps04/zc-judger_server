@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 /**
  * @author keep-looking
- * @time 2021/3/2 - 17:10
+ * @date 2021/3/2 - 17:10
  */
 
 @Data
@@ -21,6 +21,7 @@ public class Config {
     /*
      *   config entity members
      */
+
     private Integer cpuTime;
     private Integer realTime;
     private Integer memory;

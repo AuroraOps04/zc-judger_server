@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
@@ -13,6 +14,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  */
 
 @EnableOpenApi
+@EnableAsync
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
