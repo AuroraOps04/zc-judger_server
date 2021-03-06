@@ -1,14 +1,12 @@
 package edu.zc.oj.configuration;
 
-import org.omg.CORBA.Any;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
  * @date 2021/3/6 - 14:47
  */
 @Configuration
-@EnableOpenApi
 public class SwaggerConfig {
     /**
      * Select Swagger's enforceable environment and configure which interfaces to scan
@@ -34,12 +31,14 @@ public class SwaggerConfig {
         Profiles dev = Profiles.of("dev");
         boolean flag = environment.acceptsProfiles(dev);
 
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiinfo())
+                .pathMapping("/")
                 .groupName("zc-judger_server")
                 .enable(flag)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("edu.zc.oj.controller"))
+                .paths(PathSelectors.any())
                 .build();
     }
 
@@ -57,7 +56,7 @@ public class SwaggerConfig {
                 contact,
                 "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0",
-                new ArrayList()
+                new ArrayList<>()
         );
     }
 }

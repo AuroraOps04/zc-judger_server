@@ -7,8 +7,8 @@ judge:
   judge-run-log-path: /log/judger.log
   judge-user: code
   judge-group: code
-  judge-user-id: 10020
-  judge-group-id: 10020
+  judge-user-id: 11024
+  judge-group-id: 11024
 
 ---
 spring:
