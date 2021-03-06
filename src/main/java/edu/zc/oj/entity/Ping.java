@@ -1,18 +1,15 @@
 package edu.zc.oj.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author keep-looking
@@ -23,6 +20,7 @@ import java.util.regex.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@ApiModel("ping实体")
 public class Ping {
     /**
      * ping entity numbers
@@ -33,6 +31,7 @@ public class Ping {
     private Integer memory;
     private String action;
 
+    @ApiModelProperty("得到服务器的主机名")
     public String getHostName(){
         String hostName = "";
         try {
@@ -44,7 +43,7 @@ public class Ping {
         }
         return hostName;
     }
-
+    @ApiModelProperty("得到服务器的cpu核心数")
     public int getCpuCore(){
         return Runtime.getRuntime().availableProcessors();
     }

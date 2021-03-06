@@ -1,6 +1,7 @@
 package edu.zc.oj.controller;
 
 import edu.zc.oj.entity.Ping;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -12,6 +13,7 @@ public class PingController {
      * return server's message
      * @return ping Object
      */
+    @ApiOperation("ping接口")
     @PostMapping("/ping")
     public Ping ping(){
         Ping ping = new Ping();
