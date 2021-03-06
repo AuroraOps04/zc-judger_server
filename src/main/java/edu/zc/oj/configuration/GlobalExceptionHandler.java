@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         StringBuffer errorMsg= new StringBuffer();
         errors.forEach(x -> errorMsg.append(x.getDefaultMessage()).append(";"));
         log.error("---MethodArgumentNotValidException Handler--- ERROR: {}", errorMsg.toString());
-        return ResultUtils.paramsError();
+        return ResultUtils.paramsError(errors);
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public Response unknownExceptionHandler(Exception e){
+        log.error("occurrence unknown exception cause: {} ", e.getMessage());
+        return ResultUtils.serverError();
     }
 }

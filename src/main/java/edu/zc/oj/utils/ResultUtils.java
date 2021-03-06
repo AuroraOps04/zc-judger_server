@@ -9,7 +9,7 @@ import edu.zc.oj.entity.response.ResponseCode;
  */
 public class ResultUtils {
     public static Response success(){
-        return new Response(ResponseCode.SUCCESS);
+        return success(null);
     }
     public static Response success(Object data){
         return new Response(ResponseCode.SUCCESS, data);
@@ -19,6 +19,13 @@ public class ResultUtils {
     }
 
     public static Response paramsError(){
-        return new Response(ResponseCode.PARAMS_ERROR);
+       return paramsError(null);
+    }
+    public static Response paramsError(Object error){
+        return new Response(ResponseCode.PARAMS_ERROR, error);
+    }
+
+    public static Response notFoundError() {
+        return new Response(ResponseCode.NOT_FOUND);
     }
 }
