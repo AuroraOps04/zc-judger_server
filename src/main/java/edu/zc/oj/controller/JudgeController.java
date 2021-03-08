@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -142,7 +143,11 @@ public class JudgeController {
                         }
                     }
                 }
-                Files.delete(Paths.get(exePath));
+                try{
+                    Files.delete(Paths.get(exePath));
+                }catch (IOException ignore){
+
+                }
             }
 
 
