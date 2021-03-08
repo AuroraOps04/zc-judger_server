@@ -22,7 +22,8 @@ import java.util.concurrent.Future;
 @Component
 @RequiredArgsConstructor
 public class JudgeClientImpl implements JudgeClient {
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+
     @Override
     public Result run(Config config) {
         Process process;

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +35,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class JudgeController {
-    private JudgeConfiguration judgeConfiguration;
-    private JudgeClient judgeClient;
+    private final JudgeConfiguration judgeConfiguration;
+    private final JudgeClient judgeClient;
 
     /**
      * <ol>
@@ -57,8 +56,6 @@ public class JudgeController {
         final Compile compile = judgeParameter.getLanguageConfig().getCompile();
         final Run run = judgeParameter.getLanguageConfig().getRun();
         final String src = judgeParameter.getSrc();
-        final Integer maxCpuTime = judgeParameter.getMaxCpuTime();
-        final Integer maxMemory = judgeParameter.getMaxMemory();
         final String judgeLogPath = judgeConfiguration.getJudgeLogPath();
         final Integer userId = judgeConfiguration.getUserId();
         final Integer groupId = judgeConfiguration.getGroupId();
@@ -69,14 +66,41 @@ public class JudgeController {
             final String workDir = judgeResource.getJudgeDir();
 
             // compile
-            final String compileCommand = compile.getCompileCommand();
-            final String exeName = compile.getExeName();
+            String compileCommandFormat = compile.getCompileCommand();
+            final String exePath = workDir + File.separator + compile.getExeName();
             final String srcPath = workDir + File.separator + compile.getSrcName();
             // generate src file
-            final String command = String.format(compileCommand, srcPath, exeName);
+            if (compileCommandFormat.contains("{src_path}")) {
+                compileCommandFormat = compileCommandFormat.replace("{src_path}", srcPath);
+            }
+            if (compileCommandFormat.contains("{exe_dir}")) {
+                compileCommandFormat = compileCommandFormat.replace("{exe_dir}", workDir);
+            }
+            if (compileCommandFormat.contains("{exe_path}")) {
+                compileCommandFormat = compileCommandFormat.replace("{exe_path}", exePath);
+            }
             try (final PlanFileResource planFileResource = new PlanFileResource(judgeConfiguration, srcPath, src)) {
                 // compile src file
-                CommandUtils.exec(command);
+                CommandUtils.exec(compileCommandFormat);
+                String commandFormat = run.getCommand();
+                if (commandFormat.contains("{exe_path}")) {
+                    commandFormat = commandFormat.replace("{exe_path}", exePath);
+                }
+                if (commandFormat.contains("{exe_dir}")) {
+                    commandFormat = commandFormat.replace("{exe_dir}", workDir);
+                }
+                if (commandFormat.contains("{max_memory}")) {
+                    commandFormat = commandFormat.replace("{max_memory}", exePath);
+                }
+                final String[] commands = commandFormat.split(" ");
+                final String command = commands[0];
+                String[] args;
+                if (commands.length > 1) {
+                    args = new String[commands.length - 1];
+                    System.arraycopy(commands, 1, args, 0, args.length );
+                } else {
+                    args = null;
+                }
                 final List<TestCase> testCases = judgeParameter.getTestCases();
                 for (int i = 0; i < testCases.size(); i++) {
                     final String inFilePath = workDir + File.separator + i + ".in";
@@ -88,14 +112,20 @@ public class JudgeController {
                     config.setLogPath(judgeLogPath);
                     config.setGid(groupId);
                     config.setUid(userId);
-                    config.setStack(32 * 1024 * 1024);
-                    config.setMemory(maxMemory);
+                    config.setStack(128 * 1024 * 1024);
+                    config.setMemory(judgeParameter.getMaxMemory() == null ? compile.getMaxMemory() : judgeParameter.getMaxMemory());
                     config.setSeccompRuleName(run.getSeccompRule());
-                    config.setExePath(srcPath);
-                    config.setCpuTime(maxCpuTime);
+                    config.setExePath(commands[0]);
+                    config.setCpuTime(judgeParameter.getMaxCpuTime() == null ? compile.getMaxCpuTime() : judgeParameter.getMaxCpuTime());
+                    config.setRealTime(compile.getMaxRealTime());
+                    // TODO: 获取环境变量的ENV
                     config.setEnv(run.getEnv());
+                    config.setArgs(args);
                     config.setInputPath(inFilePath);
                     config.setOutputPath(outFilePath);
+                    config.setProcessNumber(JudgeClient.UNLIMITED);
+                    config.setOutputSize(1024 * 1024 * 16);
+                    config.setMemoryLimitCheckOnly(run.getMemoryLimitCheckOnly() == null ? 0 : run.getMemoryLimitCheckOnly());
 
                     try (final PlanFileResource inFileResource = new PlanFileResource(judgeConfiguration, inFilePath, in);
                          final PlanFileResource outFileResource = new PlanFileResource(judgeConfiguration, outFilePath)
@@ -104,15 +134,15 @@ public class JudgeController {
                         results.add(result);
                         if (result.getResult() == ResultCode.SUCCESS) {
 
-                            String userOut = DigestUtils.md5DigestAsHex(StringUtils.trimEnd(Arrays.toString(Files.readAllBytes(Paths.get(outFilePath))).toCharArray()).getBytes());
+                            String userOut = DigestUtils.md5DigestAsHex(StringUtils.trimEnd(new String(Files.readAllBytes(Paths.get(outFilePath))).toCharArray()).getBytes());
                             String realOut = DigestUtils.md5DigestAsHex(StringUtils.trimEnd(out.toCharArray()).getBytes());
-                            if(!userOut.equals(realOut)){
+                            if (!userOut.equals(realOut)) {
                                 result.setResult(ResultCode.WRONG_ANSWER);
                             }
                         }
                     }
                 }
-
+                Files.delete(Paths.get(exePath));
             }
 
 

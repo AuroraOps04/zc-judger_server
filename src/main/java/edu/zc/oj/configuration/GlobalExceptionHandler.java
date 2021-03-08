@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Response unknownExceptionHandler(Exception e){
-        log.error("occurrence unknown exception cause: {} ", e.getMessage());
+        log.error("occurrence unknown exception cause: {} ", e.getMessage(), e);
         return ResultUtils.serverError();
     }
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author keep-looking
  * @date 2021/3/5 - 17:47
@@ -21,11 +23,18 @@ public class Run {
     /**
      * Run entity members
      */
-    @ApiModelProperty("程序执行路径")
+    @NotNull
+    @ApiModelProperty("程序执行的format字符串")
     private String command;
-    @ApiModelProperty("使用的语言规则")
+
+    @ApiModelProperty("系统调用限制")
     private String seccompRule;
+
+
     @ApiModelProperty("环境变量")
     private String[] env;
+
+    @ApiModelProperty
+    private Integer memoryLimitCheckOnly;
 
 }

@@ -1,6 +1,5 @@
 package edu.zc.oj.entity.request;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -24,14 +23,24 @@ public class Compile {
     /**
      * Compile entity members
      */
-    @ApiModelProperty("源代码")
+    @ApiModelProperty("源文件名")
+    @NotNull
     private String srcName;
+
+    @NotNull
+    @ApiModelProperty("可执行文件名")
     private String exeName;
+
     @NotNull(message = "cpu运行最大时间不能为空")
     private Integer maxCpuTime;
+
+    @NotNull
     private Integer maxRealTime;
+
     @NotNull(message = "虚拟内存大小不能为空")
     private Integer maxMemory;
-    @ApiModelProperty("编译路径规则")
+
+    @ApiModelProperty("编译format字符串")
+    @NotNull
     private String compileCommand;
 }

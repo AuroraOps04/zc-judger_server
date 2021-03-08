@@ -45,11 +45,15 @@ public class Config {
 
         StringBuilder reArgs = new StringBuilder();
         StringBuilder reEnv = new StringBuilder();
-        for (String arg : args) {
-            reArgs.append(" --args=").append(arg);
+        if(null != args){
+            for (String arg : args) {
+                reArgs.append(" --args=").append(arg);
+            }
         }
-        for (String en:env){
-            reEnv.append(" --env=").append(en);
+        if(null != env){
+            for (String en:env){
+                reEnv.append(" --env=").append(en);
+            }
         }
 
         return " --max_cpu_time=" + cpuTime + " --max_real_time=" + realTime + " --max_memory=" + memory + " --max_stack="

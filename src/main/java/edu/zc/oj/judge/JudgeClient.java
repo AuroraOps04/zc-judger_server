@@ -9,6 +9,7 @@ import java.util.concurrent.Future;
  * @author coderPlus-tr
  */
 public interface JudgeClient {
+    Integer UNLIMITED = -1;
 
     /**
      * judge code
