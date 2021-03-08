@@ -90,7 +90,7 @@ public class JudgeController {
                     commandFormat = commandFormat.replace("{exe_dir}", workDir);
                 }
                 if (commandFormat.contains("{max_memory}")) {
-                    commandFormat = commandFormat.replace("{max_memory}", exePath);
+                    commandFormat = commandFormat.replace("{max_memory}", String.valueOf(compile.getMaxMemory() / 1024));
                 }
                 final String[] commands = commandFormat.split(" ");
                 final String command = commands[0];
