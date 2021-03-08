@@ -145,6 +145,7 @@ public class JudgeController {
                 }
                 try{
                     Files.delete(Paths.get(exePath));
+                    Files.delete(Paths.get(srcPath));
                 }catch (IOException ignore){
 
                 }
